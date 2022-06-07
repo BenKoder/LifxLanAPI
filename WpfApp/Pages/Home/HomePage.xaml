@@ -1,0 +1,56 @@
+﻿<s:BasePage x:TypeArguments="ViewModel:HomeViewModel" 
+      x:Class="WpfApp.Pages.Home.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp.Pages.Home"
+      xmlns:s="clr-namespace:WpfApp.Pages"
+      xmlns:ViewModel="clr-namespace:WpfApp.ViewModels.Home" 
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance Type=ViewModel:HomeViewModel}"
+      d:DesignHeight="450" d:DesignWidth="800"
+            Background="Black"
+      Title="Lifx Lan API"
+      xmlns:Converters="clr-namespace:WpfApp.ValueConverters">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Label Content="Lifx Products" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Foreground="White" FontSize="16pt" Margin="20"/>
+
+            <!-- serach for products on network button -->
+            <Button HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Content="Seach For Products" FontSize="16pt"
+                    IsEnabled="{Binding  Path=IsSearchingForProducts, Converter={Converters:InverseBoolConverter}}"
+                    Command="{Binding SearchForProductsCommand}"/>
+        </Grid>
+        
+        <ItemsControl ItemsSource="{Binding Products}" Grid.Row="1">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Name="myStackPanel" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Page}, Path=DataContext.ProductSelectedCommand}" CommandParameter="{Binding}" HorizontalAlignment="Left">
+                        <Border  CornerRadius="5" Background="Gray">
+                            <StackPanel>
+                                <TextBlock Text="{Binding MacAddress}"/>
+                                <TextBlock Text="{Binding Label}"/>
+                            </StackPanel>
+                        </Border>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</s:BasePage>

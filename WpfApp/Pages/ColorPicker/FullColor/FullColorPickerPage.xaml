@@ -1,0 +1,181 @@
+﻿<s:BasePage  x:TypeArguments="ViewModel:FullColorPickerPageViewModel" 
+    x:Class="WpfApp.Pages.ColorPicker.FullColor.FullColorPickerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp.Pages.ColorPicker.FullColor"
+      xmlns:ViewModel="clr-namespace:WpfApp.ViewModels.ColorPicker.FullColor"
+      d:DataContext="{d:DesignInstance Type=ViewModel:FullColorPickerPageViewModel}"
+      xmlns:s="clr-namespace:WpfApp.Pages"
+      xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FullColorPickerPage">
+
+    <Grid>
+        <!--<colorpicker:SquarePicker/>-->
+        <!--
+        <Canvas x:Name="LayoutRoot">
+            <Canvas.Resources>
+                <x:Array x:Key="sampleData" Type="sys:Object">
+                    <x:Array Type="sys:Object">
+                        <sys:Double>0</sys:Double>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="Red" Offset="0"/>
+                            
+                            <GradientStop Color="Purple" Offset="1"/>
+                        </LinearGradientBrush>
+                    </x:Array>
+
+                    <x:Array Type="sys:Object">
+                        <sys:Double>90</sys:Double>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="Purple" Offset="0"/>
+                            
+                            <GradientStop Color="Blue" Offset="1"/>
+                        </LinearGradientBrush>
+                    </x:Array>
+                    
+                    <x:Array Type="sys:Object">
+                        <sys:Double>180</sys:Double>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="Blue" Offset="0"/>
+                            
+                            <GradientStop Color="Green" Offset="1"/>
+                        </LinearGradientBrush>
+                    </x:Array>
+                    <x:Array Type="sys:Object">
+                        <sys:Double>270</sys:Double>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="Green" Offset="0"/>
+                            
+                            <GradientStop Color="Yellow" Offset="1"/>
+                        </LinearGradientBrush>
+                    </x:Array>
+                </x:Array>
+            </Canvas.Resources>
+            <ItemsControl ItemsSource="{StaticResource sampleData}">
+                <ItemsControl.OpacityMask>
+                    <RadialGradientBrush>
+                        <GradientStop Color="Transparent" Offset="0.95"/>
+                        <GradientStop Color="White" Offset="0.949"/>
+                        <GradientStop Color="White" Offset="0.501"/>
+                        <GradientStop Color="Transparent" Offset="0.5"/>
+                    </RadialGradientBrush>
+                </ItemsControl.OpacityMask>
+                <ItemsControl.Template>
+                    <ControlTemplate TargetType="ItemsControl">
+                        <ItemsPresenter/>
+                    </ControlTemplate>
+                </ItemsControl.Template>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Canvas Width="1" Height="1">
+                            <Canvas.RenderTransform>
+                                <RotateTransform Angle="{Binding [0]}" CenterX="124" CenterY="124"/>
+                            </Canvas.RenderTransform>
+                            <Viewport3D Width="250" Height="250">
+                                <ModelVisual3D>
+                                    <ModelVisual3D.Content>
+                                        <Model3DGroup>
+                                            <GeometryModel3D>
+                                                <GeometryModel3D.Geometry>
+                                                    <MeshGeometry3D Positions="0 0 0, 0 1 0, 1 0 0, 1 1 0" TextureCoordinates="0 1, 0 0, 1 1, 1 0" TriangleIndices="0 2 1, 2 3 1"/>
+                                                </GeometryModel3D.Geometry>
+                                                <GeometryModel3D.Material>
+                                                    <DiffuseMaterial Brush="{Binding [1]}"/>
+                                                </GeometryModel3D.Material>
+                                                <GeometryModel3D.Transform>
+                                                    <MatrixTransform3D Matrix="0.002,0,0,0,-0.499,-0.498,0,-0.998,0,0,1,0,0.499,0.5,0,1"/>
+                                                </GeometryModel3D.Transform>
+                                            </GeometryModel3D>
+                                            <AmbientLight Color="White" />
+                                        </Model3DGroup>
+                                    </ModelVisual3D.Content>
+                                </ModelVisual3D>
+                                <Viewport3D.Camera>
+                                    <OrthographicCamera Position="0.5 0.5 1" LookDirection="0 0 -1" UpDirection="0 1 0" Width="1"/>
+                                </Viewport3D.Camera>
+                            </Viewport3D>
+                        </Canvas>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Ellipse Width="200" Height="200"  Margin="25">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="Transparent" Offset="0"/>
+                        <GradientStop Color="Transparent" Offset="0.59"/>
+                        <GradientStop Color="white" Offset="0.6"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Canvas>
+        -->
+        <!-- https://social.msdn.microsoft.com/Forums/vstudio/en-US/e6d53b7d-887e-4834-99ee-00ade9b8afac/color-pick-on-mouse-down?forum=wpf-->
+
+        <Button x:Name="MultiColorPicker" Click="MultiColorPicker_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Grid>
+                                    <Border>
+                                        <Border.Background>
+                                            <LinearGradientBrush EndPoint="1,0">
+                                                <GradientStop Color="#ff0000" />
+                                                <GradientStop Color="#ccff00" Offset=".2" />
+                                                <GradientStop Color="#00ff66" Offset=".4" />
+                                                <GradientStop Color="#0066ff" Offset=".6" />
+                                                <GradientStop Color="#cc00ff" Offset=".8" />
+                                                <GradientStop Color="#ff0000" Offset="1" />
+                                            </LinearGradientBrush>
+                                            <!--<LinearGradientBrush EndPoint="1,0">
+                                                <GradientStop Color="Red" />
+                                                <GradientStop Color="Yellow" Offset=".2" />
+                                                <GradientStop Color="Green" Offset=".4" />
+                                                <GradientStop Color="Blue" Offset=".6" />
+                                                <GradientStop Color="Purple" Offset=".8" />
+                                                <GradientStop Color="Red" Offset="1" />
+                                            </LinearGradientBrush>
+                                            -->
+                                        </Border.Background>
+                                    </Border>
+
+                                    <Border>
+                                        <Border.Background>
+                                            <LinearGradientBrush EndPoint="0,1">
+                                                <GradientStop Color="White" />
+                                                <GradientStop Color="#00000000" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+
+                                    
+                                </Grid>
+
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Ellipse x:Name="SelectedPosition" Width="20" Height="20" IsHitTestVisible="False"
+						     Margin="-10" HorizontalAlignment="Left" VerticalAlignment="Top"
+						     Stroke="Black" StrokeThickness="2" >
+            <Ellipse.RenderTransform>
+                <TranslateTransform x:Name="translate"  />
+            </Ellipse.RenderTransform>
+        </Ellipse>
+    </Grid>
+</s:BasePage>
