@@ -10,7 +10,7 @@ Create an instance of the `LifxLan.Core.LifxCore` class.
 
 To find Lifx devices on the network, we create an event `LifxCore.LifxDeviceFound` then call the method `LifxDeviceFound.FindDevicesOnNetwork()`. This will send a broadcast message across the network which any Lifx device will respond to.
 
-When LifxCore.LifxDeviceFound rasies an event, it passes in `Core.LifxProducts.ProductBase product`. This is the Lifx project that has been found. To work out the exact product this is we can inspect the `product.ProductType` `enum` value. 
+When LifxCore.LifxDeviceFound rasies an event, it passes in `Core.LifxProducts.ProductBase product`. This is the Lifx product that has been found. To work out the exact product this is we can inspect the `product.ProductType` `enum` value. 
 
 > NOTE: At present only the Lifx A19 product is supported, but there is nothing stopping you adding support for more products
 
