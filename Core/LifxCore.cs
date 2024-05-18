@@ -168,6 +168,8 @@ namespace Core
 
 
                         // check to see if we allready have this product
+                        if (LifxProduct == null)
+                            break;
                         if (this._LifxProductsOnNetwork.Exists(LifxProduct.MacAddress) == true)
                         {
                             // check to see if the ip address has changed.

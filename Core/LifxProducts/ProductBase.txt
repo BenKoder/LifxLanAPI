@@ -234,7 +234,6 @@ namespace Core.LifxProducts
         LIFX_Filament_Amber_85 = 85,
         LIFX_Mini_White_87 = 87,
         LIFX_Mini_White_88 = 88,
-        LIFX_Switch_89 = 89,
         LIFX_Clean_90 = 90,
         LIFX_Color_91 = 91,
         LIFX_Color_92 = 92,

@@ -11,28 +11,30 @@ using System.Threading.Tasks;
 
 namespace Core.LifxProducts
 {
-    public class LifxBulb : ProductBase
+    public class LifxStrip : ProductBase
     {
-        public LifxBulb(string MacAddress, int Port, string IpAddress, ProductType productType,
-                        bool HasFullColor, bool HasNightVision, KelvinRange kelvinRange) 
+        public LifxStrip(string MacAddress, int Port, string IpAddress, ProductType productType,
+                        bool HasFullColor, bool HasNightVision, bool HasMultizone, KelvinRange kelvinRange)
                     : base(MacAddress, Port, IpAddress, productType)
         {
             this.HasFullColor = HasFullColor;
             this.HasNightVision = HasNightVision;
+            this.HasMultizone = HasMultizone;
             this.KelvinRangeSupported = kelvinRange;
 
-            this.BulbStatus = new BulbStatus();
+            this.StripStatus = new BulbStatus();
         }
 
         public new ProductType ProductType { get; protected set; }
         public bool HasFullColor { get; protected set; }
         public bool HasNightVision { get; set; }
+        public bool HasMultizone { get; set; } //!!TODO!! Implement multizone
         public KelvinRange KelvinRangeSupported { get; set; }
 
         /// <summary>
-        /// Current status of the bulb
+        /// Current status of the Strip
         /// </summary>
-        public BulbStatus BulbStatus { get; protected set; }
+        public BulbStatus StripStatus { get; protected set; }
 
 
         public override void ProcessMessage(PayloadBase MessagePayload)
@@ -41,7 +43,7 @@ namespace Core.LifxProducts
             {
                 // we have recieved a light state message (light color, brightness, etc)
                 case Packets.Payload.MessageType.LightState:
-                    this.UpdateBulbStatus((LightStatePayload)MessagePayload);
+                    this.UpdateStripStatus((LightStatePayload)MessagePayload);
                     break;
 
                 default:
@@ -57,15 +59,15 @@ namespace Core.LifxProducts
         {
             switch (this.LastLifxPacketMessageThatWasSent.HeaderPacket.PayloadType)
             {
-                // our last message was a color change requst to the bulb.
-                // the bulb has responded 
+                // our last message was a color change requst to the Strip.
+                // the Strip has responded 
                 case Packets.Payload.MessageType.SetColor:
                     // get the color payload packet
                     SetColorPayload colorPayload = (SetColorPayload)this.LastLifxPacketMessageThatWasSent.PayloadPacket;
                     // create a lifxColor from the color we sent in the last message
                     LifxColor color = new LifxColor(colorPayload.Hue, colorPayload.Saturation, colorPayload.Brightness, colorPayload.Kelvin);
-                    // update the bulb information to the color we asked to be changed too
-                    this.UpdateBulbColor(color);
+                    // update the Strip information to the color we asked to be changed too
+                    this.UpdateStripColor(color);
                     break;
 
                 // our last message was to tell the light to turn on or off
@@ -84,38 +86,38 @@ namespace Core.LifxProducts
             }
         }
         /// <summary>
-        /// This is normaly because of a message we recieved from the bulb with new information about the bulbs state
+        /// This is normaly because of a message we recieved from the Strip with new information about the Strips state
         /// update this blubs refernce to color, brightness power level, label, based on the passed in data
         /// </summary>
         /// <param name="lightState">state to set the light too</param>
-        private void UpdateBulbStatus(LightStatePayload lightState)
+        private void UpdateStripStatus(LightStatePayload lightState)
         {
-            this.BulbStatus.CurrentColor.Kelvin = lightState.Kelvin;
-            this.BulbStatus.CurrentColor.Hue = LifxColor.ConvertHueFromLifexEquiverlent(lightState.Hue);
-            this.BulbStatus.CurrentColor.Saturation = LifxColor.ConvertSaturationOrBrightnessFromLifxEquiverlent(lightState.Saturation);
-            this.BulbStatus.CurrentColor.Brightness = LifxColor.ConvertSaturationOrBrightnessFromLifxEquiverlent(lightState.Brightness);
+            this.StripStatus.CurrentColor.Kelvin = lightState.Kelvin;
+            this.StripStatus.CurrentColor.Hue = LifxColor.ConvertHueFromLifexEquiverlent(lightState.Hue);
+            this.StripStatus.CurrentColor.Saturation = LifxColor.ConvertSaturationOrBrightnessFromLifxEquiverlent(lightState.Saturation);
+            this.StripStatus.CurrentColor.Brightness = LifxColor.ConvertSaturationOrBrightnessFromLifxEquiverlent(lightState.Brightness);
 
             this.PowerLevel = lightState.Power;
 
             this.Label = lightState.Label;
         }
 
-        private void UpdateBulbColor(LifxColor color)
+        private void UpdateStripColor(LifxColor color)
         {
-            this.BulbStatus.CurrentColor.Kelvin = color.Kelvin;
-            this.BulbStatus.CurrentColor.Hue = color.Hue;
-            this.BulbStatus.CurrentColor.Saturation = color.Saturation;
-            this.BulbStatus.CurrentColor.Brightness = color.Brightness;
+            this.StripStatus.CurrentColor.Kelvin = color.Kelvin;
+            this.StripStatus.CurrentColor.Hue = color.Hue;
+            this.StripStatus.CurrentColor.Saturation = color.Saturation;
+            this.StripStatus.CurrentColor.Brightness = color.Brightness;
         }
 
         /// <summary>
-        /// Sends a GetColorMessage to the bulb asking it what its current color is
+        /// Sends a GetColorMessage to the Strip asking it what its current color is
         /// </summary>
-        public void RequestBulbColor()
+        public void RequestStripColor()
         {
             LifxPacket lifxPacket;
             MessageCreator messageCreator = new MessageCreator();
-            
+
             lifxPacket = messageCreator.CreateMessage_GetColor(this.MacAddress, ++this.MessageCount);
             this.CallRaiseMessageEvent(this, lifxPacket);
         }
@@ -124,17 +126,17 @@ namespace Core.LifxProducts
         {
             LifxPacket lifxPacket;
             MessageCreator messageCreator = new MessageCreator();
-            
 
-            // make sure the kelvin value is within the range of what the bulb supports
+
+            // make sure the kelvin value is within the range of what the Strip supports
             if (lifxColor.Kelvin > this.KelvinRangeSupported.Too)
                 lifxColor.Kelvin = this.KelvinRangeSupported.Too;
-            else if(lifxColor.Kelvin < this.KelvinRangeSupported.From)
+            else if (lifxColor.Kelvin < this.KelvinRangeSupported.From)
                 lifxColor.Kelvin = this.KelvinRangeSupported.From;
 
             lifxPacket = messageCreator.CreateMessage_SetColor(this.MacAddress, ++this.MessageCount, lifxColor);
-            this.CallRaiseMessageEvent(this,lifxPacket);
+            this.CallRaiseMessageEvent(this, lifxPacket);
         }
-        
+
     }
 }

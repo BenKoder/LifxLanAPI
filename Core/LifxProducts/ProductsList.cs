@@ -115,15 +115,142 @@ namespace Core.LifxProducts
 
             switch (productType)
             {
-                case ProductType.Lifx_A19:
-                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress,
-                                            productType, true, false, new HelperClasses.KelvinRange(1500,9000));
+                case ProductType.LIFX_Original_1000_1:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 567000, IpAddress, productType, true, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_Color_650_3:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 567000, IpAddress, productType, true, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_White_800_Low_Voltage_10:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 567000, IpAddress, productType, false, false, new HelperClasses.KelvinRange(2700, 6500));
+                    break;
+
+                case ProductType.LIFX_White_800_High_Voltage_11:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, false, false, new HelperClasses.KelvinRange(2700, 6500));
+                    break;
+
+                case ProductType.LIFX_Color_1000_15:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_White_900_BR30_Low_Voltage_18:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, false, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_White_900_BR30_High_Voltage_19:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, false, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_Color_1000_BR30_20:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_Color_1000_22:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_A19_27:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_BR30_28:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_A19_Night_Vision_29:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, true, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_BR30_Night_Vision_30:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, true, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_Z_31:
+                    product = new LifxStrip(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, true, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_Z_32:
+                    product = new LifxStrip(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, true, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_Downlight_36:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_Downlight_37:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_Beam_38:
+                    product = new LifxStrip(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, true, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_Downlight_White_to_Warm_39:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, false, false, new HelperClasses.KelvinRange(1500, 6500));
+                    break;
+
+                case ProductType.LIFX_Downlight_40:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(1500, 9000));
+                    break;
+
+                case ProductType.LIFX_A19_43:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_BR30_44:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_A19_Night_Vision_45:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, true, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_BR30_Night_Vision_46:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, true, new HelperClasses.KelvinRange(2500, 9000));
+                    break;
+
+                case ProductType.LIFX_Mini_Color_49:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(1500, 9000));
+                    break;
+
+                case ProductType.LIFX_Mini_White_to_Warm_50:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, false, false, new HelperClasses.KelvinRange(1500, 6500));
+                    break;
+
+                case ProductType.LIFX_Mini_White_51:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, false, false, new HelperClasses.KelvinRange(2700, 2700));
+                    break;
+
+                case ProductType.LIFX_Candle_68:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(1500, 9000));
+                    break;
+
+                case ProductType.LIFX_Filament_Clear_82:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, false, false, new HelperClasses.KelvinRange(2100, 2100));
+                    break;
+
+                case ProductType.LIFX_Filament_Amber_85:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, false, false, new HelperClasses.KelvinRange(2000, 2000));
+                    break;
+
+                case ProductType.LIFX_Mini_White_87:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, false, false, new HelperClasses.KelvinRange(2700, 2700));
+                    break;
+
+                /*case ProductType.LIFX_Switch_89:
+                    product = new LifxSwitch(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType);
+                    break;
+                */
+
+                case ProductType.LIFX_Clean_99:
+                    product = new LifxBulb(lifxPacket.HeaderPacket.Target, 56700, IpAddress, productType, true, false, new HelperClasses.KelvinRange(1500, 9000));
                     break;
 
                 case ProductType.Unknown:
                 default:
                     return null;
-                    
             }
 
             return product;
